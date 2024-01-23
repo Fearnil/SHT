@@ -1,0 +1,808 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *::after, *::before{
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+/* удаление всех автомат отступов */
+
+html,
+body {
+    height: 100%;
+}
+
+.wrapper{
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.main{
+    flex-grow: 1;
+}
+
+/* Эти 3 параметра нужны для выравнивания футера вниз */
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+
+ul {
+    list-style-type: none;
+    /* отключаем точки у элементов списка */
+}
+
+a {
+    text-decoration: none;
+    /* убрать нижнее подч */
+    color: inherit;
+    /* наследование цвета у род элемента */
+
+}
+
+.header {
+    background-color: #151515;
+    /* чёрный фон */
+}
+
+.fixed {
+    position: fixed;
+    left: 0;
+    right: 0;
+}
+
+.footer {
+    background-color: #151515;
+    padding: 50px 0 12px;
+    color: white;
+}
+
+.footer__menu {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px;
+}
+
+.footer__menu-title {
+    font-size: 24px;
+    font-weight: 700;
+    padding-bottom: 20px;
+    height: 62.4px;
+}
+
+
+.footer__menu-item + .footer__menu-item{
+    padding-top: 20px;
+    /* Каждый элемент в item будет делать отступ 20пх кроме верхнего */
+}
+
+
+.header-main {
+    background-color: #151515;
+    position: absolute;
+    position: fixed;
+    /* будет прозрачность фона только на гл странице */
+    z-index: 10;
+    left: 0;
+    right: 0;
+}
+
+.container {
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 0 10px;
+    /* смещение контента в центр */
+}
+
+.header__inner {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    display: flex;
+    /* чтобы список не был под логотипом */
+    justify-content: space-between;
+    /* разделение логотипа и списка по разные стороны */
+    align-items: flex-end;
+    /* всё выравнивается по низу, можно просто end */
+}
+
+.menu__list {
+    display: flex;
+    /* чтобы список был в строку */
+    gap: 35px;
+    /* отступы между элементами menu__list */
+}
+
+.menu__list-link {
+    color: white;
+    /* Делаем цвет тому что находится в элементах menu__list (menu_list-item) */
+    text-transform: uppercase;
+    /* На всякий случай капс */
+}
+
+.menu__list-link--active {
+    color: #1dae3c;
+}
+
+.menu__list-link:hover {
+    text-decoration: underline;
+}
+
+.top{
+    text-align: center;
+    color: white;
+    padding-bottom: 50px;
+    padding-top: 250px;
+    /* когда будет вторая фаза с позиционированием индексами меняем топ на 250 */
+    position: absolute;
+    z-index: 5;
+    /* zindex и pos absolute для того чтобы наложить всё на слайдер */
+    left: 0;
+    right: 0;
+    /* для выравнивания после абсолют и зиднекс */
+}
+
+.title{
+    padding-bottom: 180px;
+    font-size: 64px;
+    font-weight: 700;
+}
+
+.top__link{
+    text-align: center;
+    background-color: #151515;
+    padding: 23px;
+    width: 100%;
+    max-width: 430px;
+    display: inline-block;
+    /* чтобы падинги заработали  */
+    text-transform: uppercase;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.top__link:hover{
+    box-shadow: 0px 0px 10px #f8f8f8;;
+}
+
+.swiper::after{
+    content: "";
+    background: rgba(21,21,21,.4);
+    position: absolute;
+    z-index: 5;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+/*#12 затемнение изображения слайдера */
+
+.swiper-slide{
+    background-repeat: no-repeat;
+    /* #1 для улучшения ситуации с масштабированием */
+    background-size: cover;
+    /* #2 для улучшения ситуации с масштабированием */
+    background-position: center center;
+    /* #3 для улучшения ситуации с масштабированием */
+    height: 100vh;
+    /* #? для полного вытягивания слайда */
+}
+
+/* #4 создаём булет */
+.swiper-pagination-bullet{
+    width: 120px;
+    height: 3px;
+    background-color: #151515;
+/* #6 вписываем харки для неактивной ячейки слайдера*/
+    border-radius: 0;
+/* #8 чтобы не было овальной формы ячейки слоайдера*/
+    opacity: 1;
+/* #9 чтобы не было прозрач ячейки слайдера*/
+}
+
+/* #5 создаём булет актив*/
+.swiper-pagination-bullet-active{
+    height: 6px;
+    background-color: white;
+    /* #7 вписываем харки для активн ячейки слайдера*/
+}
+
+/*#10 для отступа между ячейками слайдера */
+.swiper-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet, .swiper-pagination-horizontal.swiper-pagination-bullets .swiper-pagination-bullet {
+    margin: 0 40px;
+}
+
+/*#11 для отступа ячеек слайдера вверх*/
+.swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction {
+    bottom: 50px;
+}
+
+/* #16 делаем why lease */
+.why-lease {
+    padding: 120px 0px;
+    /* отступ слева и сверху 170 и влево вправо 0 */
+}
+
+
+/* #18 Работа со списком */
+.why-lease-list{
+    /* #19 Будем делать grid для адаптации а не флекс*/
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+    text-align: center;
+}
+
+
+/* #17 section title  */
+.section-title {
+    margin-bottom: 70px;
+    font-size: 48px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.why-lease_item {
+    border: 1px solid rgb(200, 200, 200);
+    padding: 5px;
+    box-shadow: 0px 0px 4px #12b135;
+}
+
+.why-lease_item-image {
+    margin-bottom: 30px;
+}
+
+.why-lease-list_title {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* #21 макс ширина блока 700 (конт 1220), margin 0 auto для выравнивания всего по центру */
+
+.how {
+    padding-bottom: 110px;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.how-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.how-list {
+    margin-top: 40px;
+    margin-bottom: 80px;
+    /* #22 делаем красивые цифры */
+    counter-reset: MyCounter;
+}
+
+.how-item{
+    list-style-type: none;
+    width: 270px;
+    /* #23 направляем в правую сторону от цифр */
+    position: relative;
+    box-sizing: content-box;
+    padding: 19px 0 19px 240px;
+    min-height: 63px;
+    margin: auto;
+    text-align: center;
+}
+
+.how-item + .how-item {
+    margin-top: 40px;
+}
+
+.how-item::before {
+    counter-increment: MyCounter;
+    content: counter(MyCounter);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 48px;
+    font-weight: 700;
+    background-color: #155b24;
+    color: white;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+
+.how-text {
+    text-align: center;
+}
+
+.video {
+    padding-bottom: 120px;
+    padding-top: 40px;
+}
+
+.video-title {
+    margin-bottom: 20px;
+}
+
+.video-text {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.video-content {
+    margin: 0 auto;
+    display: block;
+}
+
+.about-us-index {
+    background-image: url("../../images/about.jpg");
+    height: 1000px;
+    background-size: cover;
+    margin-bottom: 140px;
+    margin-top: 40px;
+}
+
+.imp-text {
+    padding-top: 50px;
+    padding-bottom: 70px;
+    font-weight: 700;
+    font-size: 30px;
+}
+
+.important-list {
+    display:flex ;
+    justify-content: space-between;
+    
+}
+
+.important-item {
+    text-align: center;
+    width: 380px;
+    height: 400px;
+    border: 1px solid rgb(200, 200, 200);
+}
+
+.important-image {
+    width: 375px;
+    height: 235px;
+}
+
+.important-item:last-child {
+    margin-bottom: 40px;
+}
+
+.important-item:hover {
+    box-shadow: 0px 0px 10px #12b135;
+}
+
+.line {
+    border: none;
+    border-top: 2px solid rgb(220, 220, 220);
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.contacts {
+    padding: 110px 0 150px;
+
+}
+
+.contacts-title {
+    margin-bottom: 30px;
+}
+
+.contacts-text {
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 0 100px;
+}
+
+.form {
+    max-width: 580px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.form-textarea {
+    width: 100%;
+    resize: none;
+    padding: 28px 20px;
+    height: 290px;
+    border: 2px solid #189433;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #151515;
+    margin-bottom: 50px;
+}
+
+.form-input {
+    width: 270px;
+    padding: 18px 20px;
+    display: inline-block;
+    border: 2px solid #189433;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    margin-bottom: 50px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #151515;
+}
+
+.form-input::placeholder {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #151515;
+    opacity: 0.5;
+
+}
+
+.form-textarea::placeholder {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #151515;
+    opacity: 0.5;
+}
+
+.form-button {
+    text-transform: uppercase;
+    color: white;
+    background-color: #151515;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 13px 61px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+
+.choose {
+    padding: 180px 0 60px;
+}
+
+.cars-title {
+    margin-bottom: 40px;
+}
+
+.tabs {
+    margin-top: 40px;
+}
+
+.tabs-content {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.tabs-btn {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding-bottom: 10px;
+}
+
+.pad{
+    padding-bottom: 50px;
+}
+
+.tabs-btn-item {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    border: 1px solid rgb(190, 190, 190);
+    height: 205px;
+    width: 290px;
+    padding: 0px 5px 10px;
+    display: grid;
+    background-color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+.tabs-img {
+    width: 280px;
+    height: 174px;
+    
+}
+
+.tabs-btn-item--active {
+    color: #1dae3c;
+    box-shadow: 0px 0px 3px #12b135;
+}
+
+.tabs-btn-item:hover {
+    color: #1dae3c;
+    box-shadow: 0px 0px 7px #12b135;
+}
+
+.tabs-content-item {
+    display: none;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px 25px;
+}
+
+.tabs-content-item.tabs-content-item--active {
+    display: grid;
+}
+
+.card {
+    box-shadow: 0px 0px 2px #12b135;
+    text-align: center;
+    max-width: 280px;
+    background-color:  rgb(255, 255, 255);;
+
+}
+
+.card-img {
+    display: block;
+    border: 1px solid #189433;
+    height: 180px;
+    width: 280px;
+}
+
+.card-content {
+    padding: 0 5px;
+    border: 1px solid #189433;
+    border-top: 0;
+}
+
+.card-title {
+    padding-top: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    height: 83px;
+}
+
+.card-price {
+    margin-bottom: 20px;
+    margin-bottom: 20px;
+    font-weight: 400;
+    font-size: 24px;
+}
+
+.card-text {
+    margin-bottom: 15px;
+}
+
+.card-link{
+    display: block;
+    color: #1dae3c;
+    border: 1px solid #189433;
+    border-top: 0;
+    font-weight: 700;
+    padding: 10px 15px;
+    font-size: 20px;
+
+}
+
+.card-linkk{
+    background-color: #151515;
+    color: white;
+    padding: 15px;
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
+    /* чтобы падинги заработали  */
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 400;
+    margin: 30px auto;
+    text-align: center;
+    display: block;
+}
+
+.about-us {
+    background-image: url("../../images/about.jpg");
+    height: 1000px;
+    background-size: cover;
+    margin-bottom: 300px;
+    margin-top: 40px;
+
+}
+
+.about-block {
+    height: 1000px;
+    width: 550px;
+    background-color: white;
+    margin-bottom: 40px;
+}
+
+.about-title-item {
+    margin-bottom: 0px;
+}
+
+.about-title {
+    padding: 180px 0 60px;
+}
+
+.about-block-content {
+    padding: 0px 30px;
+}
+
+.block-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.block-list {
+    list-style-type: square;
+    color: #1dae3c;
+    font-size: 16px;
+    padding-left: 16px;
+}
+
+.block-list-element {
+    margin-bottom: 10px;
+}
+
+.block-list-element span {
+    color: #151515;
+}
+
+.block-text {
+    margin-bottom: 30px;
+}
+
+.block-text-dil {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.block-list-comp {
+    list-style-type: square;
+    color: #1dae3c;
+    font-size: 16px;
+    padding-left: 16px;
+}
+
+.span-2 {
+    font-weight: 700;
+}
+
+.contacts-map-content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.cards-contacts {
+    display: flex;
+    gap: 70px;
+}
+
+.card-contact-list-element {
+    margin-bottom: 30px
+}
+
+.cards-contact-list {
+    max-width: 300px;
+}
+
+.about-us-link {
+    background-color: #151515;
+    color: white;
+    padding: 25px;
+    width: 100%;
+    max-width: 280px;
+    /* чтобы падинги заработали  */
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 30px auto;
+    text-align: center;
+    display: block;
+}
+
+.contacts-map {
+    margin-top: 180px;
+}
+
+.map-index {
+    margin-top: 0px;
+    padding-bottom: 80px;
+}
+
+.jaguar-title {
+    padding-top: 180px;
+    padding-bottom: 40px;
+}
+
+.jaguar900 {
+    padding-bottom: 160px;
+}
+
+.jaguar900-info {
+    border: 1px solid rgb(190, 190, 190);
+    display: flex;
+}
+
+.jaguar-text {
+    padding: 0px 15px;
+}
+
+.jaguar-img-elem {
+    width: 100%;
+    display: block;
+}
+
+.jaguar-text-elem1 {
+    padding-top: 20px;
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.jaguar-text-elem2 {
+    padding-top: 35px;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.jaguar-text-elem2 span{
+    font-weight: 700;
+}
+
+.jaguar900-descr {
+    margin-top: 80px;
+    font-size: 18px;
+    padding-bottom: 30px;
+}
+
+.descr-title {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.descr-list {
+    margin-top: 30px;
+    list-style-type: square;
+    color: #1dae3c;
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+.decr-list-element {
+    margin-bottom: 8px;
+}
+
+.decr-list-element span {
+    color: #151515;
+    font-size: 18px;
+
+}
+
+.jaguar800 {
+    height: 520px;
+    width: 910px;
+}
+
+.axion {
+    height: 590px;
+    width: 910px;
+}
